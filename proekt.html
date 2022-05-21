@@ -11,13 +11,37 @@ hero = new Image();
 hero.src = "heroesheet.png";
 
 map = new Image();
-map.src = "ostrov.png";
+map.src = "images.jpg";
 
 chest = new Image();
-chest.src="flowers.png";
+chest.src="chest.png";
 
 object = new Image();
 object.src = 'house.png'
+
+fort1 = new Image()
+fort1.src = 'forest1.png'
+fort2 = new Image()
+fort2.src = 'forest2.png'
+fort3 = new Image()
+fort3.src = 'forest3.png'
+
+
+
+class tree{
+   constructor(pic, x, y){
+      this.img = pic;
+      this.posx = x;
+      this.posy = y;
+   }
+   draw(){
+      cxt.drawImage(this.img, mx-this.posx, my-this.posy, 160,175)
+   }}
+
+dec1=new tree(fort1,-200,500)
+dec2=new tree(fort2,-150,440)
+dec3=new tree(fort3,800,100)
+dec4=new tree(fort2,600,500)
 
 
 class item{
@@ -27,7 +51,7 @@ class item{
       this.posy = y;
    }
    draw(){
-      cxt.drawImage(this.img, mx-this.posx, my-this.posy, 40,40)
+      cxt.drawImage(this.img, mx-this.posx, my-this.posy, 60,60)
    }}
 
 
@@ -57,9 +81,9 @@ home = new house(object,420,1000)
 
 
 
-ch1 = new item(chest, 100,100)
-ch2 = new item(chest, 200,60)
-ch3 = new item(chest, 400,260)
+ch1 = new item(chest, -250,350)
+ch2 = new item(chest, 275,700)
+ch3 = new item(chest, 600,520)
 var loot = [ch1, ch2,ch3]
 
 const sprwidth = 95;
@@ -71,8 +95,36 @@ let playframe = 0; //счётчик кадров
 const slowframe = 15; //замедлитель
 
 var mx = 100
-var my = 400
+var my = 600
 
+//function collide(item){
+//document.addEventListener('keydown', (event) => {
+   //if ((event.key == 'e')&
+   //   (item.posx + 235<mx)&
+    //  (item.posx +265 > mx)&
+   //   (item.posy + 235<my)&
+    //  (item.posy +265 > my))
+
+  // {console.log('catch!')
+  // loot.splice(item, 1)}})
+
+function collide(item){
+   document.addEventListener('keydown',({keyCode})=>{
+      switch(keyCode){
+         case 69:
+            if (
+               (item.posx + 235<mx)&
+               (item.posx +265 > mx)&
+               (item.posy + 235<my)&
+               (item.posy +265 > my))
+         {loot.splice(item,1)
+            }}
+         })
+
+   document.addEventListener('keyup', ({keyCode})=>{
+      switch (keyCode){
+         case 69:
+         loot.splice(item,0)}})}
 
 
 document.addEventListener('keydown', ({keyCode})=>{
@@ -129,40 +181,37 @@ document.addEventListener('keyup', ({keyCode})=>{
    console.log("yup:3",my)
    break;}})
 
-function collide(item){
-   if(
-   //document.addEventListener('keydown',({keyCode})=>{
+//function collide(item){
+  // if(
+   //document.addEventListener('keyup',({keyCode})=>{
    //switch (keyCode){
    //case 69: 
    //console.log('bib)')
    //break;}}) 
-   (item.posx + 235<mx)&
-   (item.posx +265 > mx)&
-   (item.posy + 235<my)&
-   (item.posy +265 > my))
+  // (item.posx + 235<mx)&
+  // (item.posx +265 > mx)&
+   //(item.posy + 235<my)&
+   //(item.posy +265 > my))
 
-   {console.log('catch!')
-   loot.splice(item, 1)}}
-
-
-
-
-function locate(){
-
-}
+   //{console.log('catch!')
+   //loot.splice(item, 1)}}
 
 
 function animate(){
    cxt.clearRect(0,0,width,height); 
    cxt.drawImage(map, mx-800,my-800,width+800,height+800 )
-   cxt.drawImage(hero, Kadr*sprwidth, AnimLine*sprheight, sprwidth, sprheight, width/2, height/2,50,50);
+   cxt.drawImage(hero, Kadr*sprwidth, AnimLine*sprheight, sprwidth, sprheight, width/2, height/2,60,60);
    loot.forEach(elem => elem.draw())
    loot.forEach(elem => collide(elem))   
    home.draw()
+   dec1.draw()
+   dec2.draw()
+   dec3.draw()
+   dec4.draw()
    cxt.fillStyle = "#00F";
    cxt.strokeStyle = "#F00";
-   cxt.font = "italic 20pt Times New Roman";
-   cxt.fillText("Fill text", 20, 50);
+   cxt.font = "italic 14pt Times New Roman";
+   cxt.fillText("Fill text", 20, 30);
    cxt.font = 'bold 30px sans-serif';
    if (playframe % slowframe == 0)
    {if (Kadr < 10)
@@ -179,15 +228,4 @@ animate() //запуск функции снаружи
 
 
 </script>
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
