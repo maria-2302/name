@@ -218,14 +218,48 @@ function animate(){
    Kadr++;
    else Kadr = 0;}
    playframe++;
+if((my<770) && (my>740)&&(mx>355)&&(mx<370)){
+clearInterval(game)
+console.log(123)
+game2 = setInterval(animate2, 20)
+mx-=100
+my-=300}
 
-   requestAnimationFrame(animate); // перезапуск функции изнутри
+   //requestAnimationFrame(animate); // перезапуск функции изнутри
 }
-animate() //запуск функции снаружи
+//animate() //запуск функции снаружи
+game = setInterval(animate, 20)
+
+////////////////////////////////////////////////////////////////
+
+map2 = new Image()
+map2.src = 'interior2.png'
 
 
+function animate2(){
+   cxt.clearRect(0,0,width,height);  
+   cxt.drawImage(map2, mx-550,my-550,width+550,height+550 )
+   cxt.drawImage(hero, Kadr*sprwidth, AnimLine*sprheight, sprwidth, sprheight, width/2, height/2,60,60);
+   cxt.fillStyle = "#00F";
+   cxt.strokeStyle = "#F00";
+   cxt.font = "italic 14pt Times New Roman";
+   cxt.fillText("Fill text", 20, 30);
+   cxt.font = 'bold 30px sans-serif';
+  
+   if (playframe % slowframe == 0)
+   {if (Kadr < 10)
+   Kadr++;
+   else Kadr = 0;}
+   playframe++;
+   if((my<475) && (my>445)&&(mx>260)&&(mx<280)){
+       console.log('exit')
+    clearInterval(game2)
+    game=setInterval(animate,20)
+    mx+=100
+    my+=300
+}
+}
 
-
+//animate() //запуск функции снаружи
 
 </script>
-
